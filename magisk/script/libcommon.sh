@@ -12,7 +12,7 @@ BASEDIR="$(dirname "$0")"
 ###############################
 
 # $1:value $2:file path
-lock_val() 
+lock_val()
 {
     if [ -f "$2" ]; then
         chmod 0666 "$2" 2> /dev/null
@@ -22,7 +22,7 @@ lock_val()
 }
 
 # $1:value $2:file path
-mutate() 
+mutate()
 {
     if [ -f "$2" ]; then
         chmod 0666 "$2" 2> /dev/null
@@ -162,7 +162,7 @@ change_task_nice()
     ps_ret="$(ps -Ao pid,args)"
     for temp_pid in $(echo "$ps_ret" | grep "$1" | awk '{print $1}'); do
         for temp_tid in $(ls "/proc/$temp_pid/task/"); do
-            renice "$2" -p "$temp_tid"
+            renice -n "$2" -p "$temp_tid"
         done
     done
 }

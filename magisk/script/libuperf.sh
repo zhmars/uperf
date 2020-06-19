@@ -42,7 +42,7 @@ uperf_status()
 
 uperf_stop()
 {
-    killall "$UPERF_NAME"
+    killall "$UPERF_NAME" 2>/dev/null
 }
 
 uperf_start()
@@ -53,8 +53,8 @@ uperf_start()
     lock_val "1024" /proc/sys/fs/inotify/max_user_instances
 
     # cleanup
-    rm /sdcard/Android/log_uperf.log
-    rm /sdcard/Android/log_uperf.log.bak
+    rm -f /sdcard/Android/log_uperf.log
+    rm -f /sdcard/Android/log_uperf.log.bak
 
     # start uperf
     "$MODULE_PATH/$UPERF_REL/$UPERF_NAME" -o "$uperf_log_path" "$uperf_config_path" 2>> "$uperf_log_path"
